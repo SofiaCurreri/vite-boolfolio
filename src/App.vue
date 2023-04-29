@@ -31,7 +31,7 @@ export default {
   <AppHeader :title="title" />
 
   <!-- Il primo projects è quello che arriva dal figlio(ProjectList) mentre il secondo è quello del padre(App) scritto nei data -->
-  <ProjectList :projects="projects" title="Projects List" class="my-5" />
+  <ProjectList :projects="projects" title="Most recent" class="my-5" />
 </template>
 
 <style lang="scss" scoped></style>
