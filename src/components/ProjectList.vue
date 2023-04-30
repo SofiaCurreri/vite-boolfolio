@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <section class="container">
+  <section>
     <h1 class="my-4">{{ title }}</h1>
 
     <div v-if="projects.length" class="row g-4">
