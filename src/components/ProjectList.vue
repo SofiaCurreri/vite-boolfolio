@@ -7,15 +7,15 @@ export default {
     title: String,
   },
 
-  components: { ProjectCard, ProjectCard },
+  components: { ProjectCard },
 };
 </script>
 
 <template>
-  <div class="container">
-    <h1>{{ title }}</h1>
+  <section class="container">
+    <h1 class="my-4">{{ title }}</h1>
 
-    <div class="row g-4">
+    <div v-if="projects.length" class="row g-4">
       <ProjectCard
         v-for="project in projects"
         :key="project.id"
@@ -23,7 +23,8 @@ export default {
         class="col-md-4 d-flex"
       />
     </div>
-  </div>
+    <h2 v-else class="text-muted my-3">Non ci sono progetti pubblicati</h2>
+  </section>
 </template>
 
 <style lang="scss" scoped></style>
