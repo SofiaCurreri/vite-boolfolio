@@ -30,7 +30,8 @@ const router = createRouter({
       component: ProjectDetailPage,
     },
     {
-      path: "/404",
+      //"/:pathMatch(.*)*" => per tutte le altre rotte diverse da quelle qui sopra, dammi not found
+      path: "/:pathMatch(.*)*",
       name: "not-found",
       component: NotFoundPage,
     },
