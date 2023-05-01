@@ -23,7 +23,7 @@ const router = createRouter({
       component: ContactPage,
     },
     {
-      //due punti (:) indicano che si tratta di un parametro. Non si possono usare le graffe coem su laravel
+      //due punti (:) indicano che si tratta di un parametro. Non si possono usare le graffe come su laravel
       path: "/projects/:slug",
       name: "project-detail",
       component: ProjectDetailPage,
