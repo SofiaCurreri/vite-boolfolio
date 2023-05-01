@@ -7,9 +7,13 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex align-items-center justify-content-center">
+  <div class="d-flex align-items-center justify-content-center full-height">
     <strong class="me-1"> 404 </strong> | NOT FOUND
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.full-height {
+  min-height: calc(100vh - 56px);
+}
+</style>
