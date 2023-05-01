@@ -1,7 +1,6 @@
 <script>
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard.vue";
-import AppLoader from "../components/AppLoader.vue";
 
 export default {
   name: "ProjectDetailPage",
@@ -13,7 +12,7 @@ export default {
     };
   },
 
-  components: { ProjectCard, AppLoader },
+  components: { ProjectCard },
 
   created() {
     //$route è una variabile di cui disponiamo solo se abbiamo il Router

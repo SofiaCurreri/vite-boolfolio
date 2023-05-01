@@ -2,7 +2,6 @@
 import axios from "axios";
 import ProjectCard from "./ProjectCard.vue";
 import AppPagination from "./AppPagination.vue";
-import AppLoader from "./AppLoader.vue";
 
 export default {
   data() {
@@ -20,7 +19,7 @@ export default {
     title: String,
   },
 
-  components: { ProjectCard, AppPagination, AppLoader },
+  components: { ProjectCard, AppPagination },
 
   emits: ["changePage"],
 
