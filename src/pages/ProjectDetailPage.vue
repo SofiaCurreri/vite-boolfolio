@@ -21,9 +21,19 @@ export default {
 
     axios
       .get(`http://127.0.0.1:8000/api/projects/${this.$route.params.slug}`)
+
+      //se la chiamata axios va bene fai questo...
       .then((response) => {
         this.project = response.data;
-      });
+      })
+
+      //se va male fai questo...
+      .catch((err) => {
+        this.$router.push({ name: "not-found" });
+      })
+
+      //comunque vada fai questo
+      .finally(() => {});
   },
 };
 </script>

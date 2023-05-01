@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../pages/HomePage.vue";
 import ContactPage from "../pages/ContactPage.vue";
 import ProjectDetailPage from "../pages/ProjectDetailPage.vue";
+import NotFoundPage from "../pages/NotFoundPage.vue";
 
 //creazione routes
 const router = createRouter({
@@ -27,6 +28,11 @@ const router = createRouter({
       path: "/projects/:slug",
       name: "project-detail",
       component: ProjectDetailPage,
+    },
+    {
+      path: "/404",
+      name: "not-found",
+      component: NotFoundPage,
     },
   ],
 });
