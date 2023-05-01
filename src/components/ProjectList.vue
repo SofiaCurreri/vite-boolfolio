@@ -6,6 +6,7 @@ import AppPagination from "./AppPagination.vue";
 export default {
   data() {
     return {
+      error: false,
       projects: {
         list: [],
         pages: [],
@@ -27,10 +28,15 @@ export default {
       if (!endpoint) endpoint = "http://127.0.0.1:8000/api/projects";
 
       //altrimenti...
-      axios.get(endpoint).then((response) => {
-        this.projects.list = response.data.data;
-        this.projects.pages = response.data.links;
-      });
+      axios
+        .get(endpoint)
+        .then((response) => {
+          this.projects.list = response.data.data;
+          this.projects.pages = response.data.links;
+        })
+        .catch((err) => {
+          this.error = err.message;
+        });
     },
   },
 
@@ -44,7 +50,11 @@ export default {
   <section>
     <h1 class="my-4">{{ title }}</h1>
 
-    <div v-if="projects.list.length" class="row g-4">
+    <div v-if="error" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+
+    <div v-else-if="projects.list.length" class="row g-4">
       <ProjectCard
         v-for="project in projects.list"
         :key="project.id"
