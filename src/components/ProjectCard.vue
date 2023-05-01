@@ -28,9 +28,18 @@ export default {
         <h2>{{ project.title }}</h2>
       </div>
       <div class="card-body">
-        tags
-        <hr />
         {{ isDetail ? project.text : abstract }}
+        <div v-if="project.technologies.length">
+          <hr />
+          <span
+            v-for="technology in project.technologies"
+            :key="technology.id"
+            class="badge rounded-pill me-2"
+            :style="{ backgroundColor: technology.color }"
+          >
+            {{ technology.label }}
+          </span>
+        </div>
       </div>
       <div class="card-footer d-flex justify-content-between">
         Creato il {{ project.created_at }}
