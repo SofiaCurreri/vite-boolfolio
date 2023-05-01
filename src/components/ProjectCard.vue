@@ -17,17 +17,26 @@ export default {
 <template>
   <div>
     <div class="card">
-      <div class="card-header d-flex justify-content-between">
+      <div class="card-header clearfix">
+        <span
+          v-if="project.type"
+          class="badge float-end"
+          :style="{ backgroundColor: project.type.color }"
+        >
+          {{ project.type.label }}
+        </span>
         <h2>{{ project.title }}</h2>
-        <span class="badge">{{ project.type.label }}</span>
       </div>
       <div class="card-body">
+        tags
+        <hr />
         {{ isDetail ? project.text : abstract }}
       </div>
       <div class="card-footer d-flex justify-content-between">
         Creato il {{ project.created_at }}
 
         <router-link
+          v-if="!isDetail"
           class="btn btn-sm btn-primary"
           :to="{
             name: 'project-detail',
@@ -35,7 +44,6 @@ export default {
               slug: project.slug,
             },
           }"
-          v-if="!isDetail"
         >
           Vedi
         </router-link>
