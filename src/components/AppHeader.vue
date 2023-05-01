@@ -1,7 +1,4 @@
 <script>
-import ContactPage from "../pages/ContactPage.vue";
-import HomePage from "../pages/HomePage.vue";
-
 export default {
   name: "AppHeader",
 
