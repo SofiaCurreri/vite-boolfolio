@@ -1,7 +1,15 @@
 <script>
 export default {
+  name: "ProjectCard",
   props: {
     project: Object,
+    isDetail: Boolean,
+  },
+
+  computed: {
+    abstract() {
+      return this.project.text.slice(0, 200);
+    },
   },
 };
 </script>
@@ -9,11 +17,12 @@ export default {
 <template>
   <div>
     <div class="card">
-      <div class="card-header">
+      <div class="card-header d-flex justify-content-between">
         <h2>{{ project.title }}</h2>
+        <span class="badge">{{ project.type.label }}</span>
       </div>
       <div class="card-body">
-        {{ project.text }}
+        {{ isDetail ? project.text : abstract }}
       </div>
       <div class="card-footer d-flex justify-content-between">
         Creato il {{ project.created_at }}
@@ -23,9 +32,10 @@ export default {
           :to="{
             name: 'project-detail',
             params: {
-              id: project.id,
+              slug: project.slug,
             },
           }"
+          v-if="!isDetail"
         >
           Vedi
         </router-link>
