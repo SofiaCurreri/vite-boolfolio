@@ -28,7 +28,15 @@ export default {
         <h2>{{ project.title }}</h2>
       </div>
       <div class="card-body">
-        {{ isDetail ? project.text : abstract }}
+        <div class="clearfix">
+          <img
+            :src="project.image"
+            class="img-fluid float-end ms-3 mb-1"
+            width="100"
+            :alt="project.slug"
+          />
+          {{ isDetail ? project.text : abstract }}
+        </div>
         <div v-if="project.technologies.length">
           <hr />
           <span
