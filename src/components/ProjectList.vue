@@ -12,11 +12,12 @@ export default {
         list: [],
         pages: [],
       },
+      type: null,
     };
   },
 
   props: {
-    title: String,
+    type: String,
   },
 
   components: { ProjectCard, AppPagination },
@@ -28,14 +29,15 @@ export default {
       this.isLoading = true;
 
       //se non ti arriva endpoint usa questo
-      if (!endpoint) endpoint = "http://127.0.0.1:8000/api/projects";
+      if (!endpoint) endpoint = this.baseEndpoint;
 
       //altrimenti...
       axios
         .get(endpoint)
         .then((response) => {
-          this.projects.list = response.data.data;
-          this.projects.pages = response.data.links;
+          this.projects.list = response.data.projects.data;
+          this.projects.pages = response.data.projects.links;
+          if (response.data.type) this.type = response.data.type;
         })
         .catch((err) => {
           console.log(err);
@@ -45,6 +47,29 @@ export default {
           //ogni volta che fetch finisce, a prescindere da come è andato (che abbia errori o no) il loading finisce
           this.isLoading = false;
         });
+    },
+  },
+
+  computed: {
+    title() {
+      if (this.type == "most-recent") return "Progetti più recenti";
+      if (this.type == "by-type")
+        return this.type
+          ? "Progetti del tipo" + this.type.label
+          : "Progetti filtrati per tipo";
+      return "Lista progetti";
+    },
+
+    baseEndpoint() {
+      if (this.type == "most-recent")
+        return "http://127.0.0.1:8000/api/projects";
+      if (this.type == "by-type")
+        return (
+          "http://127.0.0.1:8000/api/type" +
+          this.$route.params.type_id +
+          "/projects"
+        );
+      return "http://127.0.0.1:8000/api/projects";
     },
   },
 

@@ -18,13 +18,19 @@ export default {
   <div>
     <div class="card w-100">
       <div class="card-header clearfix">
-        <span
+        <router-link
+          :to="{
+            name: 'type-projects',
+            params: {
+              type_id: project.type_id,
+            },
+          }"
           v-if="project.type"
           class="badge float-end"
           :style="{ backgroundColor: project.type.color }"
         >
           {{ project.type.label }}
-        </span>
+        </router-link>
         <h2>{{ project.title }}</h2>
       </div>
       <div class="card-body">
