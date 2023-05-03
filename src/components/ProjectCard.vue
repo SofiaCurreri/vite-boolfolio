@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div>
-    <div class="card">
+    <div class="card w-100">
       <div class="card-header clearfix">
         <span
           v-if="project.type"
