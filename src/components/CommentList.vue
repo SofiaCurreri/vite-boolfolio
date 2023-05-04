@@ -7,6 +7,10 @@ export default {
     return {};
   },
 
+  props: {
+    project_id: Number,
+  },
+
   components: { CommentForm },
 };
 </script>
@@ -14,7 +18,7 @@ export default {
 <template>
   <h1 class="my-4">Lista commenti</h1>
 
-  <CommentForm />
+  <CommentForm :project_id="project_id" />
 </template>
 
 <style lang="scss" scoped></style>

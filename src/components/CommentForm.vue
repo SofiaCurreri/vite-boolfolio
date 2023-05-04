@@ -1,5 +1,5 @@
 <script>
-// import MyComponent from "./components/MyComponent.vue";
+import axios from "axios";
 
 export default {
   name: "CommentForm",
@@ -14,13 +14,20 @@ export default {
     };
   },
 
+  props: {
+    project_id: Number,
+  },
+
   methods: {
     sendComment() {
       const comment = {
+        project_id: this.project_id,
         name: this.comment.name,
         email: this.comment.email,
         message: this.comment.message,
       };
+
+      axios.post();
     },
   },
 };
