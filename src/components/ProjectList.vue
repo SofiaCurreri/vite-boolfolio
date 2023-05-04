@@ -17,7 +17,7 @@ export default {
   },
 
   props: {
-    type: String,
+    projectsListType: String,
   },
 
   components: { ProjectCard, AppPagination },
@@ -52,20 +52,25 @@ export default {
 
   computed: {
     title() {
-      if (this.type == "most-recent") return "Progetti più recenti";
-      if (this.type == "by-type")
+      if (this.projectsListType == "most-recent") {
+        return "Progetti più recenti";
+      }
+
+      if (this.projectsListType == "by-type") {
         return this.type
-          ? "Progetti del tipo" + this.type.label
+          ? "Progetti del tipo " + this.type.label
           : "Progetti filtrati per tipo";
+      }
+
       return "Lista progetti";
     },
 
     baseEndpoint() {
-      if (this.type == "most-recent")
+      if (this.projectsListType == "most-recent")
         return "http://127.0.0.1:8000/api/projects";
-      if (this.type == "by-type")
+      if (this.projectsListType == "by-type")
         return (
-          "http://127.0.0.1:8000/api/type" +
+          "http://127.0.0.1:8000/api/type/" +
           this.$route.params.type_id +
           "/projects"
         );
