@@ -27,7 +27,10 @@ export default {
           }"
           v-if="project.type"
           class="badge float-end"
-          :style="{ backgroundColor: project.type.color }"
+          :style="{
+            backgroundColor: project.type.color,
+            textDecoration: 'none',
+          }"
         >
           {{ project.type.label }}
         </router-link>
