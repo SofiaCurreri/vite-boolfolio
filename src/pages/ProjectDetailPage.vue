@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard.vue";
+import CommentList from "../components/CommentList.vue";
 
 export default {
   name: "ProjectDetailPage",
@@ -12,7 +13,7 @@ export default {
     };
   },
 
-  components: { ProjectCard },
+  components: { ProjectCard, CommentList },
 
   created() {
     //$route è una variabile di cui disponiamo solo se abbiamo il Router
@@ -46,6 +47,7 @@ export default {
   <AppLoader v-if="isLoading" />
   <h1 class="my-4">Dettaglio Progetto {{ project?.title }}</h1>
   <ProjectCard v-if="project" :project="project" :isDetail="true" />
+  <CommentList />
 </template>
 
 <style lang="scss" scoped></style>
