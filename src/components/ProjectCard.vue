@@ -59,7 +59,7 @@ export default {
         </div>
       </div>
       <div class="card-footer d-flex justify-content-between">
-        Creato il {{ project.created_at }}
+        Creato {{ project.created_at }}
 
         <router-link
           v-if="!isDetail"
