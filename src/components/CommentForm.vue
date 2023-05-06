@@ -27,7 +27,9 @@ export default {
         message: this.comment.message,
       };
 
-      axios.post();
+      axios.post("http://127.0.0.1:8000/api/comments", comment).then((res) => {
+        console.log(res);
+      });
     },
   },
 };

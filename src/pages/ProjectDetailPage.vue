@@ -47,7 +47,7 @@ export default {
   <AppLoader v-if="isLoading" />
   <h1 class="my-4">Dettaglio Progetto {{ project?.title }}</h1>
   <ProjectCard v-if="project" :project="project" :isDetail="true" />
-  <CommentList :project_id="project.id" />
+  <CommentList v-if="project" :project_id="project.id" />
 </template>
 
 <style lang="scss" scoped></style>
