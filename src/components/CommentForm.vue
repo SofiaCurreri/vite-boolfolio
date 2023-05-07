@@ -14,6 +14,7 @@ export default {
       errors: [],
 
       success: false,
+      isLoading: false,
     };
   },
 
@@ -23,6 +24,7 @@ export default {
 
   methods: {
     sendComment() {
+      this.isLoading = true;
       //ad ogni chiamata svuotiamo la lista errori (la svuotiamo degli errori precedenti)
       this.errors = [];
 
@@ -54,13 +56,18 @@ export default {
             this.errors.push(response_errors[field][0]);
           }
         })
-        .finally(() => {});
+        .finally(() => {
+          //ogni volta che riceviamo una risposta (che sia di successo o errore) interrompiamo caricamento pagina
+          this.isLoading = false;
+        });
     },
   },
 };
 </script>
 
 <template>
+  <AppLoader v-if="isLoading" />
+
   <h3 class="offset-3 my-4">Invia un commento</h3>
 
   <div v-if="errors.length" class="alert alert-danger" role="alert">
