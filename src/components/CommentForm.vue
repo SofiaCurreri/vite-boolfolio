@@ -22,6 +22,8 @@ export default {
     project_id: Number,
   },
 
+  emits: ["addedComment"],
+
   methods: {
     sendComment() {
       this.isLoading = true;
@@ -48,6 +50,7 @@ export default {
           this.comment.message = "";
 
           this.success = true;
+          this.$emit("addedComment");
         })
         .catch((err) => {
           console.log(err.response.data);

@@ -44,7 +44,8 @@ export default {
     </li>
   </ul>
 
-  <CommentForm :project_id="project_id" />
+  <!--  @addedComment="fetchComments" => dopo che è stato aggiunto un commento dammi di nuovo la lista commenti perchè è cambiata -->
+  <CommentForm :project_id="project_id" @addedComment="fetchComments" />
 </template>
 
 <style lang="scss" scoped></style>
