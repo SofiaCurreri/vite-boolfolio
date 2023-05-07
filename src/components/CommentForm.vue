@@ -11,6 +11,9 @@ export default {
         email: "",
         message: "",
       },
+      errors: [],
+
+      success: false,
     };
   },
 
@@ -20,6 +23,11 @@ export default {
 
   methods: {
     sendComment() {
+      //ad ogni chiamata svuotiamo la lista errori (la svuotiamo degli errori precedenti)
+      this.errors = [];
+
+      this.success = false;
+
       const comment = {
         project_id: this.project_id,
         name: this.comment.name,
@@ -27,9 +35,26 @@ export default {
         message: this.comment.message,
       };
 
-      axios.post("http://127.0.0.1:8000/api/comments", comment).then((res) => {
-        console.log(res);
-      });
+      axios
+        .post("http://127.0.0.1:8000/api/comments", comment)
+        .then((res) => {
+          console.log(res);
+
+          //se richiesta è andata a buon fine svuotiamo i contenitori di questi elementi una volta inviato il commento
+          this.comment.name = "";
+          this.comment.email = "";
+          this.comment.message = "";
+
+          this.success = true;
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          const response_errors = err.response.data.errors;
+          for (const field in response_errors) {
+            this.errors.push(response_errors[field][0]);
+          }
+        })
+        .finally(() => {});
     },
   },
 };
@@ -37,7 +62,18 @@ export default {
 
 <template>
   <h3 class="offset-3 my-4">Invia un commento</h3>
-  <form action="" @submit.prevent="sendComment">
+
+  <div v-if="errors.length" class="alert alert-danger" role="alert">
+    <ul>
+      <li v-for="error in errors">{{ error }}</li>
+    </ul>
+  </div>
+
+  <div v-if="success" class="alert alert-success" role="alert">
+    Il commento è stato inviato con successo
+  </div>
+
+  <form @submit.prevent="sendComment">
     <div class="row my-3">
       <div class="col-3 text-end">
         <label for="comment_name">Nome: </label>
@@ -47,7 +83,7 @@ export default {
           type="text"
           class="form-control"
           id="comment_name"
-          v-model="name"
+          v-model="comment.name"
         />
       </div>
     </div>
@@ -61,7 +97,7 @@ export default {
           type="email"
           class="form-control"
           id="comment_email"
-          v-model="email"
+          v-model="comment.email"
         />
       </div>
     </div>
@@ -72,7 +108,7 @@ export default {
       </div>
       <div class="col-9">
         <textarea
-          v-model="message"
+          v-model="comment.message"
           id="comment_message"
           class="form-control"
         ></textarea>
